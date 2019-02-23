@@ -1,15 +1,19 @@
 
-var express = require("express");
-var path = require("path");
-
+const express = require("express");
+const path = require("path");
+const bodyParser = require('body-parser');
 // Sets up the Express App
 // =============================================================
-var app = express();
-var PORT = 8080;
+const app = express();
+const PORT = 8080;
 
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+//Sets up body-parser
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 // Routes
 // =============================================================
@@ -24,12 +28,12 @@ app.get("/survey", function(req, res) {
 });
 
 // Displays all characters
-app.get("/api/friends", function(req, res) {
+app.get("/data/friends", function(req, res) {
   return res.json(characters);
 });
 
 // Displays a single character, or returns false
-app.get("/api/characters/:character", function(req, res) {
+app.get("/data/characters/:character", function(req, res) {
   var chosen = req.params.character;
 
   console.log(chosen);
@@ -44,7 +48,7 @@ app.get("/api/characters/:character", function(req, res) {
 });
 
 // Create New Characters - takes in JSON input
-app.post("/api/friends", function(req, res) {
+app.post("/data/friends", function(req, res) {
   // req.body hosts is equal to the JSON post sent from the user
   // This works because of our body parsing middleware
   var newcharacter = req.body;

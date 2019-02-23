@@ -1,13 +1,18 @@
+// ===============================================================================
+// LOAD DATA
+// Linking the routes to "data" sources that hold the array friends data
+// ===============================================================================
+
 var friends = require('../data/friends.js');
 
 module.exports = function (app) {
   // //api path to get the friends data, responds with a json object (an array of friends). Activated on both html pages with blue API Link
-  app.get('/data/friends', function (req,res) {
+  app.get('/api/friends', function (req,res) {
       res.json(friends);
   });
 
   // *** Updates an array of friends "database" array and sends back the json form of the most compatible new friend
-  app.post('/data/friends', function (req, res) {
+  app.post('/api/friends', function (req, res) {
       // newFriend is the user that filled out the survey
       var newFriend = req.body;
 
